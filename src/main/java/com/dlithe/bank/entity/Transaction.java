@@ -36,5 +36,13 @@ public class Transaction {
     @Column(name = "status")
     private String status;
 
+    @Column(name = "account_id")
+    private int accountId;
+
+    @Column(name = "account_type")
+    private String accountType;
+
+
+
 
 }

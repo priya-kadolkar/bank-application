@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.RestController;
 public interface CustomersDAO extends JpaRepository<Customers,Integer> {
 
     @Query(value = "SELECT * from customers WHERE email_id =?1 and password=?2 ", nativeQuery = true)
-    Customers login(String emailId, String password);
+    Customers fetchEmailIdAndPassword(String emailId, String password);
 }

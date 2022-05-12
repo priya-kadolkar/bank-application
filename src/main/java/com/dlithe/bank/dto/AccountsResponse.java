@@ -13,6 +13,8 @@ import java.util.List;
 @EqualsAndHashCode
 public class AccountsResponse {
 
+    private String firstName;
+    private String lastName;
     private List<AccountTypeResponse> accountType;
 
 }

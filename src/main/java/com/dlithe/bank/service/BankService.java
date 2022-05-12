@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public interface BankService {
     ResponseEntity<BaseResponse> registerCustomer(CustomerRequest customerRequest);
 
-    ResponseEntity<BaseResponse> loginNewCustomer(LoginRequest loginRequest);
+    ResponseEntity<BaseResponse> loginCustomer(LoginRequest loginRequest);
 
 
     ResponseEntity<BaseResponse> fetchAccountDetailsBasedOOnCustomerId(int customerId,String accountType);

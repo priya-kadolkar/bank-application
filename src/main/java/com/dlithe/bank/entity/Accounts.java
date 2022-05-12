@@ -21,7 +21,7 @@ public class Accounts {
     private int id;
 
     @Column(name = "account_number")
-    private int accountNumber;
+    private String accountNumber;
 
     @Column(name = "balance")
     private double balance;
@@ -30,7 +30,7 @@ public class Accounts {
     private String accountType;
 
     @Column(name = "created_date")
-    private Date createdDate;
+    private String createdDate;
 
     @Column(name = "customer_id")
     private int customerId;

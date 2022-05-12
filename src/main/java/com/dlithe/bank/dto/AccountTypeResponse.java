@@ -14,4 +14,6 @@ import java.util.List;
 public class AccountTypeResponse {
 
     private String accountType;
+    private String accountNumber;
+
 }

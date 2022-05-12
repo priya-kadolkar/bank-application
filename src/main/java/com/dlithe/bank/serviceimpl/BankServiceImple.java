@@ -61,8 +61,8 @@ public class BankServiceImple implements BankService {
     }
 
     @Override
-    public ResponseEntity<BaseResponse> loginNewCustomer(LoginRequest loginRequest) {
-        Optional<Customers> customers = Optional.ofNullable(customersDAO.login(loginRequest.getEmailId(), loginRequest.getPassword()));
+    public ResponseEntity<BaseResponse> loginCustomer(LoginRequest loginRequest) {
+        Optional<Customers> customers = Optional.ofNullable(customersDAO.fetchEmailIdAndPassword(loginRequest.getEmailId(), loginRequest.getPassword()));
 
         BaseResponse baseResponse=new BaseResponse();
 
@@ -78,7 +78,7 @@ public class BankServiceImple implements BankService {
         customerDetails.setCustomerId(customers.get().getId());
 //        customerDetails.setFirstName(customers.get().getFirstName());
 
-        baseResponse.setMessage("Logged in  successfully");
+        baseResponse.setMessage("Logged in successfully");
         baseResponse.setHttpStatus(HttpStatus.OK);
         baseResponse.setHttpStatusCode(HttpStatus.OK.value());
         baseResponse.setResponse(customerDetails);
@@ -117,6 +117,9 @@ public class BankServiceImple implements BankService {
         log.info("inside fetchAccounts {}: ", customerId);
         BaseResponse baseResponse=new BaseResponse();
 
+        Optional<Customers> customers=customersDAO.findById(customerId);
+        Customers customerFromDatabase=customers.get();
+
         List<Accounts> accountsList=accountsDAO.findAccountsByCustomerId(customerId);
 
         AccountsResponse accountsResponse=new AccountsResponse();
@@ -124,11 +127,14 @@ public class BankServiceImple implements BankService {
         List<AccountTypeResponse> accountTypeResponseList=new ArrayList<>();
         for(Accounts account:accountsList){
             AccountTypeResponse accountTypeResponse=new AccountTypeResponse();
+            accountTypeResponse.setAccountNumber(account.getAccountNumber());
             accountTypeResponse.setAccountType(account.getAccountType());
 
             accountTypeResponseList.add(accountTypeResponse);
         }
 
+        accountsResponse.setFirstName(customerFromDatabase.getFirstName());
+        accountsResponse.setLastName(customerFromDatabase.getLastName());
         accountsResponse.setAccountType(accountTypeResponseList);
 
         baseResponse.setMessage("Account fetched successfully..");
@@ -141,7 +147,7 @@ public class BankServiceImple implements BankService {
 
     @Override
     public ResponseEntity<BaseResponse> sendMoney(SendMoneyRequest sendMoneyRequest) {
-        log.info("Inside Bank service impl method sendMoney",sendMoneyRequest);
+        log.info("Inside Bank service impl method sendMoney {}",sendMoneyRequest);
 
         double updatedBalance=0.0;
         BaseResponse baseResponse=new BaseResponse();
@@ -173,15 +179,10 @@ public class BankServiceImple implements BankService {
 
         accountsDAO.save(accounts);
 
-
             baseResponse.setMessage("Transaction successful");
             baseResponse.setHttpStatus(HttpStatus.OK);
             baseResponse.setHttpStatusCode(HttpStatus.OK.value());
 
             return new ResponseEntity<>(baseResponse, HttpStatus.OK);
-
-
-
     }
-
 }

@@ -12,10 +12,10 @@ import java.util.Date;
 @ToString
 @EqualsAndHashCode
 public class AccountDetails {
-    private int accountNumber;
+    private String accountNumber;
     private String firstName;
     private String lastName;
     private String accountType;
     private double balance;
-    private Date createdDate;
+    private String createdDate;
 }

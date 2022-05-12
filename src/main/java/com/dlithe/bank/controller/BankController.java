@@ -27,17 +27,17 @@ public class BankController {
     }
 
     @PostMapping("customer-login")
-    public ResponseEntity<BaseResponse> loginNewCustomer(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<BaseResponse> loginCustomer(@RequestBody LoginRequest loginRequest) {
         if (loginRequest == null) {
             BaseResponse baseResponse = new BaseResponse();
-            baseResponse.setMessage("login details can not be null ");
+            baseResponse.setMessage("Login details can not be null ");
             baseResponse.setHttpStatus(HttpStatus.BAD_REQUEST);
             baseResponse.setHttpStatusCode(HttpStatus.BAD_REQUEST.value());
             return new ResponseEntity<>(baseResponse, HttpStatus.BAD_REQUEST);
 
         }
 
-        return bankService.loginNewCustomer(loginRequest);
+        return bankService.loginCustomer(loginRequest);
 
     }
 
