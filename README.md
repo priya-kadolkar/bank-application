@@ -14,3 +14,5 @@ BANKING APPLICATION
 -	On the account details screen, the Send Money button should be there, clicking on which you enter the amount to be sent and pressing the SEND button.
 -	If SEND AMOUNT > ACCOUNT Balance, Money sent successfully and update the account balance in DB.
 -	If SEND AMOUNT < ACCOUNT BALANCE, Insufficient Account Balance.
+
+
